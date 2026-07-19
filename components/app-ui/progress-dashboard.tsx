@@ -45,7 +45,7 @@ export default function ProgressDashboard() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `dutchyy-progress-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `arabyy-progress-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };

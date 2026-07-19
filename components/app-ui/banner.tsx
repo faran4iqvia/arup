@@ -81,7 +81,7 @@ const Banner: FC<BannerProps> = ({
 
   return (
     <Card
-      className={`banner ${config.bg} ${fontClass} w-full gap-2 px-4 py-2 ${className}`}
+      className={`banner bidi-isolate-block ${config.bg} ${fontClass} w-full gap-2 px-4 py-2 ${className}`}
       role="region"
       aria-label={title || `${type} notice`}
       dir={finalDir}

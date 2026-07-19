@@ -1,0 +1,14 @@
+{
+  "title": "Pronunciation",
+  "description": "Arabic sounds, stress, and listening",
+  "root": true,
+  "pages": [
+    "index",
+    "01-emphatic-and-pharyngeal-consonants",
+    "02-vowel-length-and-hamza",
+    "03-sun-and-moon-letters",
+    "04-word-stress",
+    "05-connected-speech",
+    "06-msa-vs-dialect-pronunciation"
+  ]
+}

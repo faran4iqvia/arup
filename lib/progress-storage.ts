@@ -1,5 +1,5 @@
-export const PROGRESS_STORAGE_KEY = 'dutchyy-progress-v1';
-export const PROGRESS_UPDATED_EVENT = 'dutchyy-progress-updated';
+export const PROGRESS_STORAGE_KEY = 'arabyy-progress-v1';
+export const PROGRESS_UPDATED_EVENT = 'arabyy-progress-updated';
 
 function notifyProgressUpdated(): void {
   if (typeof window === 'undefined') return;

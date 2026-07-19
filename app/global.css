@@ -49,6 +49,42 @@ html > body[data-scroll-locked] {
 
 body {
   font-family: var(--font-sans);
+  direction: ltr;
+}
+
+/* Lesson pages stay LTR; Arabic/Urdu use isolated wrappers inside */
+article#nd-page {
+  direction: ltr;
+}
+
+/* Inline RTL text in LTR paragraphs — prevents bidi layout breakage */
+.arabic-isolate {
+  unicode-bidi: isolate;
+  direction: rtl;
+  font-family: var(--font-arabic);
+  text-align: right;
+}
+
+.urdu-isolate {
+  unicode-bidi: isolate;
+  direction: rtl;
+  font-family: var(--font-urdu);
+  text-align: right;
+}
+
+.ltr-block {
+  unicode-bidi: isolate;
+  direction: ltr;
+}
+
+/* Block level RTL cards (Banner, BilingualBlock) — contained direction */
+.bidi-isolate-block {
+  unicode-bidi: isolate;
+}
+
+.bilingual-block .arabic-isolate {
+  display: block;
+  width: 100%;
 }
 
 body article#nd-page * {

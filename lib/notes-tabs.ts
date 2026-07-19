@@ -1,4 +1,8 @@
-import type { Folder, Root } from 'fumadocs-core/page-tree';
+import {
+  visit,
+  type Folder,
+  type Root,
+} from 'fumadocs-core/page-tree';
 import type { LayoutTab } from 'fumadocs-ui/layouts/shared';
 import type { ReactNode } from 'react';
 
@@ -9,98 +13,102 @@ export type NotesTabConfig = {
   icon: ReactNode;
   /** Extra URLs that should also mark this tab active (e.g. sibling routes). */
   matchUrls?: string[];
+  /**
+   * Fallback URL prefix for tab highlighting when the folder index is not found.
+   * Sidebar scoping comes from `"root": true` in each section's meta.json.
+   */
+  sectionPrefix?: string;
 };
 
-function collectFolderUrls(node: Folder | Root): Set<string> {
-  const urls = new Set<string>();
+/** Top-level Welcome pages that belong on the Welcome tab (not course phases). */
+const WELCOME_PAGE_URLS = ['/notes/rtl-component-test'] as const;
 
-  function walk(folder: Folder | Root) {
-    if ('index' in folder && folder.index) urls.add(folder.index.url);
-    for (const child of folder.children) {
-      if (child.type === 'page' && !child.external) urls.add(child.url);
-      if (child.type === 'folder') walk(child);
+function findFolderByIndexUrl(
+  node: Root | Folder,
+  tabUrl: string
+): Folder | undefined {
+  let match: Folder | undefined;
+
+  visit(node, (item) => {
+    if (match) return 'break';
+    if (item.type === 'folder' && item.index?.url === tabUrl) {
+      match = item;
+      return 'break';
     }
-  }
+  });
 
-  walk(node);
+  return match;
+}
+
+function collectUrlsByPrefix(tree: Root, prefix: string): Set<string> {
+  const urls = new Set<string>();
+  const normalized =
+    prefix.endsWith('/') && prefix.length > 1 ? prefix.slice(0, -1) : prefix;
+
+  visit(tree, (node) => {
+    if (
+      node.type === 'page' &&
+      !node.external &&
+      node.url.startsWith(normalized)
+    ) {
+      urls.add(node.url);
+    }
+  });
+
   return urls;
 }
 
-function findRootFolders(node: Root | Folder): Folder[] {
-  const folders: Folder[] = [];
+function collectWelcomeUrls(config: NotesTabConfig): Set<string> {
+  const urls = new Set<string>(['/notes', ...WELCOME_PAGE_URLS]);
+  for (const extra of config.matchUrls ?? []) {
+    urls.add(extra);
+  }
+  return urls;
+}
 
-  function walk(current: Root | Folder) {
-    if (current.type === 'folder' && current.root) folders.push(current);
-    for (const child of current.children) {
-      if (child.type === 'folder') walk(child);
+function resolveTabUrls(tree: Root, config: NotesTabConfig): Set<string> {
+  if (config.url === '/notes') {
+    return collectWelcomeUrls(config);
+  }
+
+  if (config.sectionPrefix) {
+    const urls = collectUrlsByPrefix(tree, config.sectionPrefix);
+    urls.add(config.url);
+    for (const extra of config.matchUrls ?? []) {
+      urls.add(extra);
     }
+    return urls;
   }
 
-  walk(node);
-  if ('fallback' in node && node.fallback) walk(node.fallback);
-
-  return folders;
-}
-
-/** Top-level Welcome pages (siblings of index) that belong on the Welcome tab. */
-const WELCOME_PAGE_URLS = [
-  '/notes/inburgering-a2-plan',
-  '/notes/inburgering-b1-plan',
-] as const;
-
-function isWelcomeFolder(folder: Folder): boolean {
-  if (folder.index?.url === '/notes') return true;
-  return folder.children.some(
-    (child) =>
-      child.type === 'page' &&
-      WELCOME_PAGE_URLS.includes(
-        child.url as (typeof WELCOME_PAGE_URLS)[number]
-      )
-  );
-}
-
-function findFolderForTab(
-  folders: Folder[],
-  tabUrl: string
-): Folder | undefined {
-  if (tabUrl === '/notes') {
-    return folders.find(isWelcomeFolder);
+  const urls = new Set([config.url]);
+  for (const extra of config.matchUrls ?? []) {
+    urls.add(extra);
   }
-
-  const sectionPrefix = tabUrl.replace(/\/[^/]+$/, '');
-
-  return folders.find((folder) => {
-    if (folder.index?.url === tabUrl) return true;
-
-    // A tab URL like `/notes/daily-drill` collapses to the base `/notes`, which
-    // is not a real section folder. Don't let it greedily match the first
-    // folder in the tree — fall back to the tab's own URL instead.
-    if (sectionPrefix === '/notes') return false;
-
-    return folder.children.some(
-      (child) =>
-        child.type === 'page' && child.url.startsWith(`${sectionPrefix}/`)
-    );
-  });
+  return urls;
 }
 
 export function buildNotesTabs(
   tree: Root,
   configs: NotesTabConfig[]
 ): LayoutTab[] {
-  const rootFolders = findRootFolders(tree);
+  return configs.map((config) => {
+    const { matchUrls: _matchUrls, sectionPrefix: _sectionPrefix, ...tab } =
+      config;
 
-  return configs.map(({ matchUrls, ...config }) => {
-    const folder = findFolderForTab(rootFolders, config.url);
-    const urls = folder ? collectFolderUrls(folder) : new Set([config.url]);
-    for (const extra of matchUrls ?? []) urls.add(extra);
-    if (config.url === '/notes') {
-      for (const welcomeUrl of WELCOME_PAGE_URLS) urls.add(welcomeUrl);
+    const folder = findFolderByIndexUrl(tree, config.url);
+
+    // Prefer $folder binding for root sections (requires client-side build).
+    if (folder?.root) {
+      return {
+        ...tab,
+        $folder: folder,
+      };
     }
 
+    // Welcome tab and fallbacks use explicit URL sets.
     return {
-      ...config,
-      urls,
+      ...tab,
+      urls: resolveTabUrls(tree, config),
     };
   });
 }

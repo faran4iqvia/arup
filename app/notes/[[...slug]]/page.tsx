@@ -42,13 +42,13 @@ export default async function Page(props: PageProps<'/notes/[[...slug]]'>) {
   const slugPath = params.slug?.join('/') ?? '';
   const isGrammarLesson =
     params.slug?.[0] === 'grammar' &&
-    slugPath !== 'grammar/00-introduction' &&
-    slugPath !== 'grammar/review-and-practice';
+    slugPath !== 'grammar/index' &&
+    !slugPath.endsWith('/index');
 
   const isPronunciationLesson =
     params.slug?.[0] === 'pronunciation' &&
-    slugPath !== 'pronunciation/00-introduction' &&
-    slugPath !== 'pronunciation/review-and-practice';
+    slugPath !== 'pronunciation/index' &&
+    !slugPath.endsWith('/index');
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>

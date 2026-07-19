@@ -1,0 +1,12 @@
+{
+  "title": "Phase 3: Sentence Building",
+  "description": "Units 9 to 12 — past tense, future, connecting ideas, describing",
+  "root": true,
+  "pages": [
+    "index",
+    "unit-09-past-tense",
+    "unit-10-future-and-plans",
+    "unit-11-connecting-ideas",
+    "unit-12-describing-and-comparing"
+  ]
+}

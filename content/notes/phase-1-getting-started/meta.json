@@ -1,0 +1,12 @@
+{
+  "title": "Phase 1: Getting Started",
+  "description": "Units 1 to 4 — script, first words, simple sentences, everyday basics",
+  "root": true,
+  "pages": [
+    "index",
+    "unit-01-script-and-sounds",
+    "unit-02-first-words",
+    "unit-03-simple-sentences",
+    "unit-04-everyday-basics"
+  ]
+}

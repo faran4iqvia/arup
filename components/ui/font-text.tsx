@@ -47,7 +47,9 @@ const UrduBase = React.forwardRef<HTMLSpanElement, FontTextProps>(
   ({ className, ...props }, ref) => (
     <span
       ref={ref}
-      className={cn('font-urdu text-[1.75rem] leading-loose', className)}
+      className={cn('urdu-isolate text-[1.75rem] leading-loose', className)}
+      dir="rtl"
+      lang="ur"
       {...props}
     />
   )
@@ -58,7 +60,9 @@ const UrduMd = React.forwardRef<HTMLSpanElement, FontTextProps>(
   ({ className, ...props }, ref) => (
     <span
       ref={ref}
-      className={cn('font-urdu text-4xl leading-loose', className)}
+      className={cn('urdu-isolate text-4xl leading-loose', className)}
+      dir="rtl"
+      lang="ur"
       {...props}
     />
   )
@@ -69,20 +73,23 @@ const UrduLg = React.forwardRef<HTMLSpanElement, FontTextProps>(
   ({ className, ...props }, ref) => (
     <span
       ref={ref}
-      className={cn('font-urdu text-5xl leading-loose', className)}
+      className={cn('urdu-isolate text-5xl leading-loose', className)}
+      dir="rtl"
+      lang="ur"
       {...props}
     />
   )
 );
 UrduLg.displayName = 'UrduLg';
 
-// Arabic Font Components
-// Container base is 1.75rem (set in .font-arabic CSS class).
+// Arabic Font Components — always isolated RTL so LTR lesson layout stays stable.
 const ArabicBase = React.forwardRef<HTMLSpanElement, FontTextProps>(
   ({ className, ...props }, ref) => (
     <span
       ref={ref}
-      className={cn('font-arabic text-[1.75rem] leading-loose', className)}
+      className={cn('arabic-isolate text-[1.75rem] leading-loose', className)}
+      dir="rtl"
+      lang="ar"
       {...props}
     />
   )
@@ -93,7 +100,9 @@ const ArabicMd = React.forwardRef<HTMLSpanElement, FontTextProps>(
   ({ className, ...props }, ref) => (
     <span
       ref={ref}
-      className={cn('font-arabic text-4xl leading-loose', className)}
+      className={cn('arabic-isolate text-4xl leading-loose', className)}
+      dir="rtl"
+      lang="ar"
       {...props}
     />
   )
@@ -104,7 +113,9 @@ const ArabicLg = React.forwardRef<HTMLSpanElement, FontTextProps>(
   ({ className, ...props }, ref) => (
     <span
       ref={ref}
-      className={cn('font-arabic text-5xl leading-loose', className)}
+      className={cn('arabic-isolate text-5xl leading-loose', className)}
+      dir="rtl"
+      lang="ar"
       {...props}
     />
   )

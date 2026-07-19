@@ -1,0 +1,123 @@
+---
+title: RTL Component Test Page
+description: Internal test page for Arabic and English mixed layout. Verify before generating course lessons.
+---
+
+## Purpose
+
+This page tests every RTL safe component. The English headings, lists, and exercises below should stay left aligned. Arabic should appear only inside designated wrappers.
+
+## Inline Arabic in English paragraphs
+
+<P>
+  The Arabic word for book is <ArabicBase>كِتَاب</ArabicBase>, pronounced{' '}
+  <Transliteration>kitāb</Transliteration>. You can also say{' '}
+  <ArabicMd>هَذَا كِتَاب</ArabicMd> meaning "this is a book."
+</P>
+
+## Vocabulary table
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Arabic</TableHead>
+      <TableHead>Transliteration</TableHead>
+      <TableHead>English</TableHead>
+    </TableRow>
+  </TableHeader>
+
+  <TableBody>
+    <TableRow>
+      <TableCell><ArabicBase>كِتَاب</ArabicBase></TableCell>
+      <TableCell><Transliteration>kitāb</Transliteration></TableCell>
+      <TableCell>book</TableCell>
+    </TableRow>
+
+    <TableRow>
+      <TableCell><ArabicBase>مَدْرَسَة</ArabicBase></TableCell>
+      <TableCell><Transliteration>madrasa</Transliteration></TableCell>
+      <TableCell>school</TableCell>
+    </TableRow>
+
+    <TableRow>
+      <TableCell><ArabicBase>مَاء</ArabicBase></TableCell>
+      <TableCell><Transliteration>māʼ</Transliteration></TableCell>
+      <TableCell>water</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+## BilingualBlock
+
+<BilingualBlock arabic="السَّلَامُ عَلَيْكُم" transliteration="as salāmu ʿalaykum" english="Peace be upon you" />
+
+<BilingualBlock speaker="A" arabic="مَرْحَبًا، كَيْفَ حَالُكَ؟" transliteration="marḥaban, kayfa ḥāluk?" english="Hello, how are you?" />
+
+<BilingualBlock speaker="B" arabic="بِخَيْرٍ، شُكْرًا" transliteration="bi khayr, shukran" english="Fine, thank you" />
+
+## DialogueBlock
+
+<DialogueBlock title="Greeting dialogue">
+  <BilingualBlock speaker="A" arabic="السَّلَامُ عَلَيْكُم" transliteration="as salāmu ʿalaykum" english="Peace be upon you" />
+
+  <BilingualBlock speaker="B" arabic="وَعَلَيْكُمُ السَّلَام" transliteration="wa ʿalaykum as salām" english="And peace be upon you too" />
+
+  <BilingualBlock speaker="A" arabic="مَا اسْمُكَ؟" transliteration="mā ismuk?" english="What is your name?" />
+
+  <BilingualBlock speaker="B" arabic="اسْمِي أَحْمَد" transliteration="ismī Aḥmad" english="My name is Ahmad" />
+</DialogueBlock>
+
+## Banner (Arabic block)
+
+<Banner emoji="👋" title="Arabic greeting" lang="ar" dir="rtl" type="info">
+  <ArabicMd>أَهْلًا وَسَهْلًا</ArabicMd>
+</Banner>
+
+<TranslationBlock label="Meaning">Welcome (lit. family and ease)</TranslationBlock>
+
+## Card with mixed content
+
+<ShadCnCard className="p-4">
+  <CardHeader>
+    <CardTitle>Build a sentence</CardTitle>
+  </CardHeader>
+
+  <CardContent>
+    <P>
+      Start with the pronoun <ArabicBase>أَنَا</ArabicBase>{' '}
+      <Transliteration>anā</Transliteration> (I), then add the noun{' '}
+      <ArabicBase>طَالِب</ArabicBase> <Transliteration>ṭālib</Transliteration>{' '}
+      (student).
+    </P>
+
+    <BilingualBlock arabic="أَنَا طَالِب" transliteration="anā ṭālib" english="I am a student" size="base" />
+  </CardContent>
+</ShadCnCard>
+
+## Steps stay LTR (do not wrap in dir=rtl)
+
+<Steps>
+  <Step>
+    ### Step 1: Read the Arabic
+
+    Read <ArabicBase>كِتَاب</ArabicBase> aloud.
+
+    The English explanation stays on the left.
+  </Step>
+
+  <Step>
+    ### Step 2: Translate
+
+    <ArabicBase>هَذَا كِتَاب</ArabicBase> means "this is a book."
+  </Step>
+</Steps>
+
+## Exercise list (LTR prompts)
+
+1. Translate to Arabic: "Peace be upon you"
+2. What does <ArabicBase>كِتَاب</ArabicBase> mean?
+3. Fill in the blank: <ArabicBase>أَنَا \_\_\_</ArabicBase> (student)
+
+<Callout title="Layout check" type="success">
+  If this callout, the numbered list, and headings are all left aligned while Arabic blocks read right to left inside their cards, the RTL setup is working correctly.
+</Callout>

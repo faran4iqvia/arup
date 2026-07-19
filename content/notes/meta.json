@@ -1,7 +1,16 @@
 {
-  "title": "Welcome",
-  "description": "Level up your Nederland / Dutch",
+  "title": "Arabyy",
+  "description": "Learn Modern Standard Arabic step by step",
   "root": true,
   "pagesIndex": "index",
-  "pages": ["index", "inburgering-a2-plan", "inburgering-b1-plan"]
+  "pages": [
+    "index",
+    "rtl-component-test",
+    "phase-1-getting-started",
+    "phase-2-everyday-arabic",
+    "phase-3-sentence-building",
+    "phase-4-spoken-fluency",
+    "pronunciation",
+    "grammar"
+  ]
 }

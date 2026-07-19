@@ -28,8 +28,22 @@ import {
   CardFooter,
 } from '@/components/ui/card';
 import { Typography } from '@/components/ui/typography';
-import { SansBase, SansMd, SansLg } from '@/components/ui/font-text';
+import {
+  SansBase,
+  SansMd,
+  SansLg,
+  ArabicBase,
+  ArabicMd,
+  ArabicLg,
+  UrduBase,
+  UrduMd,
+  UrduLg,
+} from '@/components/ui/font-text';
 import Banner from '@/components/app-ui/banner';
+import BilingualBlock from '@/components/app-ui/bilingual-block';
+import DialogueBlock from '@/components/app-ui/dialogue-block';
+import TranslationBlock from '@/components/app-ui/translation-block';
+import Transliteration from '@/components/app-ui/transliteration';
 import RefCard from '@/components/app-ui/ref-card';
 import DrawerFromVaul from '@/components/app-ui/drawer';
 import CardWithBg from '@/components/app-ui/card-with-bg';
@@ -123,6 +137,17 @@ export function getMDXComponents(components?: MDXComponents) {
     SansBase,
     SansMd,
     SansLg,
+    ArabicBase,
+    ArabicMd,
+    ArabicLg,
+    UrduBase,
+    UrduMd,
+    UrduLg,
+    // Arabic / bilingual lesson components
+    BilingualBlock,
+    DialogueBlock,
+    TranslationBlock,
+    Transliteration,
     // app-ui components
     Banner,
     RefCard,

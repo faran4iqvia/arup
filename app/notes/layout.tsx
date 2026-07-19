@@ -94,11 +94,7 @@ const referenceTabs: NotesTabConfig[] = [
   },
 ];
 
-const tabConfigs = [
-  ...welcomeTabs,
-  ...phaseTabs,
-  ...referenceTabs,
-];
+const tabConfigs = [...welcomeTabs, ...phaseTabs, ...referenceTabs];
 
 // @ts-ignore
 export default function Layout({ children }: LayoutProps<'/notes'>) {

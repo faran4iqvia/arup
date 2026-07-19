@@ -1,8 +1,4 @@
-import {
-  visit,
-  type Folder,
-  type Root,
-} from 'fumadocs-core/page-tree';
+import { visit, type Folder, type Root } from 'fumadocs-core/page-tree';
 import type { LayoutTab } from 'fumadocs-ui/layouts/shared';
 import type { ReactNode } from 'react';
 
@@ -92,8 +88,11 @@ export function buildNotesTabs(
   configs: NotesTabConfig[]
 ): LayoutTab[] {
   return configs.map((config) => {
-    const { matchUrls: _matchUrls, sectionPrefix: _sectionPrefix, ...tab } =
-      config;
+    const {
+      matchUrls: _matchUrls,
+      sectionPrefix: _sectionPrefix,
+      ...tab
+    } = config;
 
     const folder = findFolderByIndexUrl(tree, config.url);
 

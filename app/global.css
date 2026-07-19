@@ -87,6 +87,38 @@ article#nd-page {
   width: 100%;
 }
 
+/* Vocabulary tables: Arabic column RTL from the right, Latin and English LTR from the left */
+article#nd-page .vocab-table th:nth-child(1),
+article#nd-page .vocab-table td:nth-child(1) {
+  text-align: right;
+  vertical-align: top;
+  width: 30%;
+}
+
+article#nd-page .vocab-table th:nth-child(2),
+article#nd-page .vocab-table td:nth-child(2) {
+  text-align: left;
+  vertical-align: top;
+  width: 22%;
+}
+
+article#nd-page .vocab-table th:nth-child(3),
+article#nd-page .vocab-table td:nth-child(3) {
+  text-align: left;
+  vertical-align: top;
+}
+
+article#nd-page .vocab-table th:nth-child(4),
+article#nd-page .vocab-table td:nth-child(4) {
+  text-align: right;
+  vertical-align: top;
+}
+
+article#nd-page .vocab-table .arabic-isolate {
+  display: inline-block;
+  width: 100%;
+}
+
 body article#nd-page * {
   max-width: 1920px;
 }

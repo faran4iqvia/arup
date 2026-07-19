@@ -57,6 +57,8 @@ import GrammarFocus from '@/components/app-ui/grammar-focus';
 import VocabularyTool from '@/components/app-ui/vocabulary-tool';
 import LessonCompleteButton from '@/components/app-ui/lesson-complete-button';
 import LessonVocabularyTool from '@/components/app-ui/lesson-vocabulary-tool';
+import VocabTable from '@/components/app-ui/vocab-table';
+import MistakeCards from '@/components/app-ui/mistake-cards';
 import { Steps, Step } from './steps';
 import type { HTMLAttributes } from 'react';
 
@@ -113,6 +115,7 @@ export function getMDXComponents(components?: MDXComponents) {
     CardFooter,
     Badge,
     Table,
+    VocabTable,
     TableBody,
     TableCell,
     TableFooter,
@@ -156,6 +159,7 @@ export function getMDXComponents(components?: MDXComponents) {
     PageActions,
     GridContainer,
     ExerciseAccordion,
+    MistakeCards,
     FlashCard,
     FlashCardDeck,
     LessonFlashcards,
